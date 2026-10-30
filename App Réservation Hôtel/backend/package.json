@@ -12,5 +12,8 @@
   "type": "commonjs",
   "devDependencies": {
     "prisma": "^8.0.0-rc.29"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.10.1"
   }
 }
