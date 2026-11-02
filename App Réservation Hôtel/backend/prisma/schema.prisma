@@ -13,3 +13,28 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Client {
+  id           Int           @id @default(autoincrement())
+  nom          String
+  email        String        @unique
+  reservations Reservation[]
+}
+
+model Chambre {
+  id           Int           @id @default(autoincrement())
+  numero       String        @unique
+  type         String
+  prix         Decimal       @db.Decimal(8, 2)
+  reservations Reservation[]
+}
+
+model Reservation {
+  id        Int      @id @default(autoincrement())
+  dateDebut DateTime
+  dateFin   DateTime
+  clientId  Int
+  chambreId Int
+  client    Client   @relation(fields: [clientId], references: [id])
+  chambre   Chambre  @relation(fields: [chambreId], references: [id])
+}
